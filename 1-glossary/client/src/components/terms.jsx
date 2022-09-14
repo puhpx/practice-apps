@@ -9,8 +9,15 @@ class Terms extends React.Component {
   }
 
   render () {
+    console.log(this.props)
     return (<div>
-
+    {this.props.terms.map((term) => {
+      return (<div  key={term._id}>
+        {term.term}:
+        <span> &nbsp; </span>
+        {term.definition}
+      </div>)
+    })}
 
 
     </div>)
