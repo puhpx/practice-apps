@@ -2,10 +2,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const dbname = process.env.DB_NAME;
 console.log(dbname);
-// 1. Use mongoose to establish a connection to MongoDB
-// 2. Set up any schema and models needed by the app
-// 3. Export the models
-// 4. Import the models into any modules that need them
+
 mongoose.connect(`mongodb://localhost/${dbname}`);
 
 let glossarySchema = mongoose.Schema({
@@ -20,13 +17,7 @@ let save = async (term, definition) => {
     term: term,
     definition: definition,
   })
-  newTerm.save((err, data) => {
-    if(err) {
-      console.log('Save error:');
-    } else {
-      console.log('Data saved!')
-    }
-  })
+  return newTerm.save();
 }
 
 let get = async (cb) => {
@@ -34,5 +25,12 @@ let get = async (cb) => {
           .exec(cb)
 }
 
+let deleteTerm = async (term, definition) => {
+  console.log('1:', term, '2: ', definition)
+  return Glossary.deleteOne({term: term, definition: definition})
+
+}
+
 module.exports.save = save;
 module.exports.get = get;
+module.exports.deleteTerm = deleteTerm;

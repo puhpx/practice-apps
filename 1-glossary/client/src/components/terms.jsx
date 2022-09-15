@@ -6,6 +6,11 @@ class Terms extends React.Component {
     this.state = {
 
     }
+    this.delete = this.delete.bind(this)
+  }
+
+  delete (term, definition) {
+    this.props.deleteTerm(term, definition);
   }
 
   render () {
@@ -16,6 +21,9 @@ class Terms extends React.Component {
         {term.term}:
         <span> &nbsp; </span>
         {term.definition}
+        <span> &nbsp; </span>
+        <button onClick={this.delete.bind(this, term.term, term.definition)}>
+        Delete </button>
       </div>)
     })}
 

@@ -17,27 +17,47 @@ class App extends React.Component {
 
   create(term, definition) {
     console.log(`new glossary "${term}: ${definition}" is created`)
-  $.ajax({
-    type: "POST",
-    url: "/glossary",
-    data: JSON.stringify({term: term, definition: definition}),
-    success: (data) => {
-      this.setState ({
-        terms: data
-      })
-    },
-    error: (err) => {
-      console.log('POST Request err')
-    },
-    contentType: "application/json"
-  })
+    $.ajax({
+      type: "POST",
+      url: "/glossary",
+      data: JSON.stringify({term: term, definition: definition}),
+      success: (data) => {
+        this.setState ({
+          terms: data
+        })
+      },
+      error: (err) => {
+        console.log('POST Request err')
+      },
+      contentType: "application/json"
+    })
+  }
+
+  delete(term, definition) {
+    console.log('delete called')
+    $.ajax({
+      type: "DELETE",
+      url: "/glossary",
+      data: JSON.stringify({term: term, definition: definition}),
+      success: (data) => {
+        console.log('--->', data)
+        this.setState ({
+          terms: data
+        })
+      },
+      error: (err) => {
+        console.log('DELETE Request err')
+      },
+      contentType: "application/json"
+    })
   }
 
   render () {
     return (<div>
       <h1> Glossary </h1>
       <Create createTerm={this.create.bind(this)}/>
-      <Terms terms={this.state.terms}/>
+      <Terms terms={this.state.terms}
+             deleteTerm={this.delete.bind(this)}/>
 
     </div>)
   }
