@@ -31,6 +31,10 @@ class Create extends React.Component {
     this.props.searchTerm(this.state.term)
   }
 
+  show(props){
+    this.props.showAll()
+  }
+
   render () {
     return (<div>
       <h4>Add a new glossary term</h4>
@@ -46,6 +50,9 @@ class Create extends React.Component {
       </button>
       <span> &nbsp; &nbsp; </span>
       <button onClick={this.search.bind(this)}>Search Term
+      </button>
+      <span> &nbsp; &nbsp; </span>
+      <button onClick={this.show.bind(this)}>Show Glossary
       </button>
     </div>)
   }

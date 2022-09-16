@@ -60,6 +60,22 @@ class App extends React.Component {
     })
   }
 
+  showAll() {
+    $.ajax({
+      type: "GET",
+      url: "/glossary",
+      success: (data) => {
+        this.setState ({
+          terms: data
+        })
+      },
+      error: (err) => {
+        console.log('GET Request err')
+      },
+      contentType: "application/json"
+    })
+  }
+
   delete(term, definition) {
     console.log('delete called')
     $.ajax({
@@ -82,7 +98,8 @@ class App extends React.Component {
     return (<div>
       <h1> Glossary </h1>
       <Create createTerm={this.create.bind(this)}
-              searchTerm={this.search.bind(this)}/>
+              searchTerm={this.search.bind(this)}
+              showAll={this.showAll.bind(this)}/>
       <Terms terms={this.state.terms}
              deleteTerm={this.delete.bind(this)}/>
 

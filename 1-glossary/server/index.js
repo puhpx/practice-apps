@@ -53,6 +53,17 @@ app.delete('/glossary', (req, res) => {
   })
 })
 
+app.get('/glossary', (req, res) => {
+  db.get((err, data) => {
+    if(err) {
+      console.log('failed to get terms')
+    } else {
+      console.log('got data from db!', data);
+      return res.status(200).send(data);
+    }
+  })
+})
+
 
 
 let port = process.env.PORT;
