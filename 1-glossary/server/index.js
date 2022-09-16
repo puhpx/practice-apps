@@ -12,12 +12,30 @@ app.post('/glossary', (req, res) => {
       if(err) {
         console.log('failed to get terms')
       } else {
-        console.log('got data from db!', data);
+        console.log('got data from db!');
+        return res.status(200).send(data);
+      }
+    })
+  })
+  .catch(()=>{
+    console.log ('Term exists');
+    db.get((err, data) => {
+      if(err) {
+        console.log('failed to get terms')
+      } else {
+        console.log('got data from db!');
         return res.status(200).send(data);
       }
     })
   })
 });
+
+app.post('/search', (req, res) => {
+  db.getTerm(req.body)
+  .then ((data) => {
+    return res.status(200).send(data)
+  })
+})
 
 app.delete('/glossary', (req, res) => {
   console.log('delete req.body', req.body);

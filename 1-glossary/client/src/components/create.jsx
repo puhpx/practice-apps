@@ -27,6 +27,10 @@ class Create extends React.Component {
     this.props.createTerm(this.state.term, this.state.definition)
   }
 
+  search(props){
+    this.props.searchTerm(this.state.term)
+  }
+
   render () {
     return (<div>
       <h4>Add a new glossary term</h4>
@@ -39,6 +43,9 @@ class Create extends React.Component {
       onChange={this.onChangeD.bind(this)}/>
       <span> &nbsp; &nbsp; </span>
       <button onClick={this.create.bind(this)}>Add Term
+      </button>
+      <span> &nbsp; &nbsp; </span>
+      <button onClick={this.search.bind(this)}>Search Term
       </button>
     </div>)
   }

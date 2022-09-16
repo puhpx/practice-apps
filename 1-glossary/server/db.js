@@ -6,7 +6,9 @@ console.log(dbname);
 mongoose.connect(`mongodb://localhost/${dbname}`);
 
 let glossarySchema = mongoose.Schema({
-  term: String,
+  term: {
+    type: String, unique : true
+  },
   definition: String,
 })
 
@@ -25,6 +27,10 @@ let get = async (cb) => {
           .exec(cb)
 }
 
+let getTerm = async (term) => {
+  return Glossary.find(term)
+}
+
 let deleteTerm = async (term, definition) => {
   console.log('1:', term, '2: ', definition)
   return Glossary.deleteOne({term: term, definition: definition})
@@ -34,3 +40,4 @@ let deleteTerm = async (term, definition) => {
 module.exports.save = save;
 module.exports.get = get;
 module.exports.deleteTerm = deleteTerm;
+module.exports.getTerm = getTerm;

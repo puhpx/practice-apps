@@ -33,6 +33,24 @@ class App extends React.Component {
     })
   }
 
+  search(term) {
+    console.log(`Term "${term}" was searched`)
+    $.ajax({
+      type: "POST",
+      url: "/search",
+      data: JSON.stringify({term: term}),
+      success: (data) => {
+        this.setState ({
+          terms: data
+        })
+      },
+      error: (err) => {
+        console.log('Search POST Request err')
+      },
+      contentType: "application/json"
+    })
+  }
+
   delete(term, definition) {
     console.log('delete called')
     $.ajax({
@@ -40,7 +58,6 @@ class App extends React.Component {
       url: "/glossary",
       data: JSON.stringify({term: term, definition: definition}),
       success: (data) => {
-        console.log('--->', data)
         this.setState ({
           terms: data
         })
@@ -55,7 +72,8 @@ class App extends React.Component {
   render () {
     return (<div>
       <h1> Glossary </h1>
-      <Create createTerm={this.create.bind(this)}/>
+      <Create createTerm={this.create.bind(this)}
+              searchTerm={this.search.bind(this)}/>
       <Terms terms={this.state.terms}
              deleteTerm={this.delete.bind(this)}/>
 
