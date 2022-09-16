@@ -6,6 +6,7 @@ app.use(express.json());
 app.use(express.static(__dirname + '/../client/dist'));
 
 app.post('/glossary', (req, res) => {
+  console.log('hahaha', req.body)
   db.save(req.body.term, req.body.definition)
   .then(()=>{
     db.get((err, data) => {

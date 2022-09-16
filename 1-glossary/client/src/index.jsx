@@ -3,15 +3,24 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Create from './components/create.jsx';
 import Terms from './components/terms.jsx';
+import fakeGlossary from './fakeGlossary.js'
 
 class App extends React.Component {
   constructor (props) {
     super (props);
     this.state = {
-      terms: [
-        {_id: '1', term: 'test1', definition: 'test1'},
-        {_id: '2', term: 'test2', definition: 'test2'}
-      ]
+      terms: []
+    }
+  }
+
+  componentDidMount(){
+    this.seed(fakeGlossary)
+  }
+
+  seed(obj) {
+    for (let key in obj) {
+      console.log(typeof key, typeof obj[key])
+      this.create(key, obj[key])
     }
   }
 
