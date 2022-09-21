@@ -80,13 +80,13 @@ class Checkout extends React.Component {
       method: "POST",
       url: '/',
       data: JSON.stringify(this.state),
-      success: () => {
-        // console.log('hahaha POST request successful'),
+      success: (data) => {
+        alert(data),
         this.setState (this.initialState)
         // console.log('State after POST--->', this.state)
       },
       error: (err) => {
-        console.log('POST Request err')
+        alert(err.responseText)
       },
       contentType: "application/json"
     })

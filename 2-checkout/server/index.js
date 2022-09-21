@@ -4,6 +4,7 @@ const bp = require('body-parser');
 const path = require("path");
 const sessionHandler = require("./middleware/session-handler");
 const logger = require("./middleware/logger");
+const dm = require("./dbmethods")
 
 // Establishes connection to the database on server start
 const db = require("./db.js");
@@ -30,17 +31,19 @@ app.get("/", (req, res) => {
 })
 
 app.post("/", (req, res) => {
-  console.log('POST request test', req.body, req.session_id)
   let {f1, f2, f3, summary, ...body} = req.body;
   body.session_id = req.session_id;
-  console.log('---.....>>>', body)
-  var sqlS = `INSERT INTO user_info (name, email)
-  VALUE ('nibafffasfasfafba', 'rrr')`
-  db.query(sqlS, (err, res) => {
-    if (err) throw err;
-    console.log('jafjhakfh')
+  db.queryAsync("SELECT name, session_id FROM user_info")
+  .then((data) => {
+    if (data[0].every((obj) => {return (obj.name !== req.body.name || obj.session_id !== req.session_id)})) {
+      dm.create(body)
+      .then(() => {
+        return res.status(200).send('Thank you for purchase!');
+      })
+    } else {
+      return res.status(403).send('You have already purchased!')
+    }
   })
-  res.end()
 })
 
 app.listen(process.env.PORT);

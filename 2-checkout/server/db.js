@@ -41,11 +41,11 @@ db.connectAsync()
       address2 VARCHAR(255),
       city VARCHAR(255),
       state VARCHAR(255),
-      zipcode INTEGER,
-      phone INTEGER,
-      creditCard INTEGER,
+      zipcode INTEGER(8),
+      phone INTEGER(13),
+      creditCard INTEGER(22),
       expiration VARCHAR(10),
-      cvv INTEGER(6),
+      cvv INTEGER(5),
       billingZipcode INTEGER(8)
     )`)
   )

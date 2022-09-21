@@ -33,10 +33,12 @@ class Form2 extends React.Component {
              onChange={this.onChange.bind(this)}/>
       Zipcode:
       <input id={'zipcode'}
+             type="number"
              value={this.props.appState.zipcode}
              onChange={this.onChange.bind(this)}/>
       Phone Number:
       <input id={'phone'}
+             type="number"
              value={this.props.appState.phone}
              onChange={this.onChange.bind(this)}/>
       <button onClick={this.props.F3.bind(this)}>Next2</button>

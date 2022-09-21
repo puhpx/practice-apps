@@ -17,6 +17,7 @@ class Form3 extends React.Component {
       <h3> form3 </h3>
       Credit Card Number:
       <input id={'creditCard'}
+             type="number"
              value={this.props.appState.creditCard}
              onChange={this.onChange.bind(this)}/>
       Expiration Date:
@@ -25,10 +26,12 @@ class Form3 extends React.Component {
              onChange={this.onChange.bind(this)}/>
       cvv:
       <input id={'cvv'}
+             type="number"
              value={this.props.appState.cvv}
              onChange={this.onChange.bind(this)}/>
       billingZipcode:
       <input id={'billingZipcode'}
+             type="number"
              value={this.props.appState.billingZipcode}
              onChange={this.onChange.bind(this)}/>
       <button onClick={this.props.summary.bind(this)}>Next3(summary)</button>
